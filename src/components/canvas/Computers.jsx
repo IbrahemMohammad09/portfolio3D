@@ -8,21 +8,36 @@ const Computers = ({ isMobile }) => {
   const computer = useGLTF("./desktop_pc/scene.gltf");
 
   return (
-    <mesh >
-      <hemisphereLight intensity={0.15} groundColor='white' />
+    <mesh castShadow receiveShadow>
+      {/* Hemisphere Light with increased intensity */}
+      <hemisphereLight intensity={1} groundColor="white" />
+      
+      {/* SpotLight with increased intensity and shadow */}
       <spotLight
         position={[-20, 50, 10]}
-        angle={0.12}
+        angle={0.3}
         penumbra={1}
-        intensity={1}
+        intensity={2}
         castShadow
         shadow-mapSize={1024}
       />
-      <pointLight intensity={1} />
+      
+      {/* PointLight with increased intensity */}
+      <pointLight intensity={2} />
+
+      {/* Directional Light for additional lighting */}
+      <directionalLight
+        position={[10, 10, 10]}
+        intensity={1}
+        castShadow
+      />
+
+      {/* GLTF Model */}
       <primitive
         object={computer.scene}
         scale={isMobile ? 0.7 : 0.75}
-        position={isMobile ? [0, -3, -2.2] : [0, -3.25, -1.5]}
+        // تم تعديل المحور Z لجعل المودل أعمق
+        position={isMobile ? [0, -3, -3] : [0, -3.25, -2.5]} 
         rotation={[-0.01, -0.2, -0.1]}
       />
     </mesh>
@@ -55,7 +70,7 @@ const ComputersCanvas = () => {
 
   return (
     <Canvas
-      frameloop='demand'
+      frameloop="demand"
       shadows
       dpr={[1, 2]}
       camera={{ position: [20, 3, 5], fov: 25 }}
@@ -67,6 +82,11 @@ const ComputersCanvas = () => {
           maxPolarAngle={Math.PI / 2}
           minPolarAngle={Math.PI / 2}
         />
+        
+        {/* Ambient Light for general illumination */}
+        <ambientLight intensity={0.5} />
+
+        {/* Computers component with lighting and shadow adjustments */}
         <Computers isMobile={isMobile} />
       </Suspense>
 
