@@ -44,7 +44,7 @@ const ExperienceCard = ({experience}) =>{
 const Experience = () => {
   
   return (
-    <>
+    <section id="work">
       <motion.div 
         // initial="hidden" // يبدأ الأنيميشن من الحالة المخفية
         // animate="show" // ينتقل إلى حالة العرض
@@ -60,7 +60,7 @@ const Experience = () => {
           ))}
         </VerticalTimeline>
       </div>
-    </>
+    </section>
   )
 }
 
