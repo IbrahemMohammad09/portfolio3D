@@ -45,7 +45,10 @@ const Experience = () => {
   
   return (
     <>
-      <motion.div variants={textVariant()}>
+      <motion.div 
+        initial="hidden" // يبدأ الأنيميشن من الحالة المخفية
+        animate="show" // ينتقل إلى حالة العرض
+        variants={textVariant()} className='mt-[20px]'>
         <p className={styles.sectionSubText}>What i have done so far</p>
         <h2 className={styles.sectionHeadText}>Work Experience.</h2>
       </motion.div>
